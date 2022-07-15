@@ -33,6 +33,37 @@
     width: 50%;
 }
 
+.remove-all-modal {
+    position: fixed;
+    top: 30%;
+    left: 25%;
+    width: 50%;
+    height: 250px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    text-align: center;
+    background: #f4f4f4;
+    border: 1px solid #333;
+}
+
+.remove-all-modal .modal-header {
+    opacity: 0.6;
+    font-weight: 500;
+}
+
+.btn-confirm,
+.btn-cancel {
+    width: 50%;
+    margin: 25px auto 0px;
+}
+
+.btn-cancel {
+    border: 1px solid #333;
+}
+
+
 @media screen and (max-width: 767px) {
     .remove-all-btn-wrapper {
         float: none;
@@ -42,6 +73,18 @@
     .remove-all-btn-wrapper,
     .remove-all-btn {
         width: 100%;
+    }
+
+    .remove-all-modal{
+        left: 5%;
+        right: 5%;
+        width: 90%;
+    }
+
+    .btn-confirm,
+    .btn-cancel {
+        width: 100%;
+        margin: 25px auto 0px;
     }
 }
 

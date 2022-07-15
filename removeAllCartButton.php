@@ -211,8 +211,6 @@ class RemoveAllCartButton extends Module
 
     public function hookDisplayShoppingCartFooter() {
 
-        $link = new Link;
-        $controller_link = $link->getModuleLink('removeAllCartButton','ajax');
 
         $this->context->smarty->assign(
             [
@@ -225,5 +223,20 @@ class RemoveAllCartButton extends Module
         }
         
     }
+
+    public function displayModal() {
+
+        $link = new Link;
+        $controller_link = $link->getModuleLink('removeAllCartButton','ajax');
+
+        $this->context->smarty->assign(
+            [
+                'controller_link' => $controller_link,
+            ]
+        );
+        
+        return $this->display(__FILE__,'modal.tpl');
+    }
+
 
 }

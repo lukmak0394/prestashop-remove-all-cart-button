@@ -27,6 +27,22 @@
 */
 
 
+$('.remove-all-btn').click((e) => {
+    e.preventDefault();
+
+    $.ajax({
+        type: 'GET',
+        url: controller_link,
+        success: (res) => {
+            const jsonData = JSON.parse(res);
+            $('#footer').before(jsonData.modal)
+        }
+    })
+});
+
+
+
+
 
 
 
