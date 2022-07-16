@@ -31,4 +31,14 @@
 	</p>
 	<br />
 </div>
+<div class="panel">
+	<h3>Below you'll find configuration guideline</h3>
+	<ul>
+		<li><strong>Remove All Button Text</strong> - Text of button that appears in cart</li>
+		<li><strong>Modal header text </strong> - Text of modal header</li>
+		<li><strong>Modal - confirm button text </strong> - Text of modal confirm button</li>
+		<li><strong>Modal - cancel button text</strong> - Text of modal cancel button</li>
+	</ul>
+	<p>You can also leave the fields unset - then default values will be used.</p>
+</div>
 

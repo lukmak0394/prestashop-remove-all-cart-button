@@ -152,6 +152,26 @@ class RemoveAllCartButton extends Module
                             )
                         ),
                     ),
+                    array(
+                        'type' => 'text',
+                        'label' => 'Remove All Button Text',
+                        'name' => 'REMOVEALLCARTBUTTON_REMOVE_ALL_BTN_TXT' ,
+                    ),
+                    array(
+                        'type' => 'text',
+                        'label' => 'Modal header text',
+                        'name' => 'REMOVEALLCARTBUTTON_MODAL_HEADER_TXT' ,
+                    ),
+                    array(
+                        'type' => 'text',
+                        'label' => 'Modal - confirm button text',
+                        'name' => 'REMOVEALLCARTBUTTON_MODAL_CONFIRM_TXT'
+                    ),
+                    array(
+                        'type' => 'text',
+                        'label' => 'Modal - cancel button text',
+                        'name' => 'REMOVEALLCARTBUTTON_MODAL_CANCEL_TXT'
+                    ),
                 ),
                 'submit' => array(
                     'title' => $this->l('Save'),
@@ -159,7 +179,6 @@ class RemoveAllCartButton extends Module
             ),
         );
     }
-
     /**
      * Set values for the inputs.
      */
@@ -167,6 +186,10 @@ class RemoveAllCartButton extends Module
     {
         return array(
             'REMOVEALLCARTBUTTON_LIVE_MODE' => Configuration::get('REMOVEALLCARTBUTTON_LIVE_MODE', true),
+            'REMOVEALLCARTBUTTON_REMOVE_ALL_BTN_TXT' => Configuration::get('REMOVEALLCARTBUTTON_REMOVE_ALL_BTN_TXT', true),
+            'REMOVEALLCARTBUTTON_MODAL_HEADER_TXT' => Configuration::get('REMOVEALLCARTBUTTON_MODAL_HEADER_TXT', true),
+            'REMOVEALLCARTBUTTON_MODAL_CONFIRM_TXT' => Configuration::get('REMOVEALLCARTBUTTON_MODAL_CONFIRM_TXT', true),
+            'REMOVEALLCARTBUTTON_MODAL_CANCEL_TXT' => Configuration::get('REMOVEALLCARTBUTTON_MODAL_CANCEL_TXT', true),
         );
     }
 
@@ -211,10 +234,16 @@ class RemoveAllCartButton extends Module
 
     public function hookDisplayShoppingCartFooter() {
 
+        $config = $this->getConfigFormValues();
+
+        $removeAllButtonText = null;
+
+        $config['REMOVEALLCARTBUTTON_REMOVE_ALL_BTN_TXT'] ? $removeAllButtonText = $config['REMOVEALLCARTBUTTON_REMOVE_ALL_BTN_TXT'] : $removeAllButtonText = 'Remove All';
 
         $this->context->smarty->assign(
             [
                 'controller_link' => $controller_link,
+                'button_text' => $removeAllButtonText
             ]
         );
         
@@ -229,13 +258,27 @@ class RemoveAllCartButton extends Module
         $link = new Link;
         $controller_link = $link->getModuleLink('removeAllCartButton','ajax');
 
+        $config = $this->getConfigFormValues();
+
+        $modalHeaderText = null;
+        $modalConfirmBtnText = null;
+        $modalCancelBtnText = null;
+
+        $config['REMOVEALLCARTBUTTON_MODAL_HEADER_TXT'] ? $modalHeaderText = $config['REMOVEALLCARTBUTTON_MODAL_HEADER_TXT'] : $modalHeaderText = 'Are you sure that you want to delete all products from cart?';
+        $config['REMOVEALLCARTBUTTON_MODAL_CONFIRM_TXT'] ? $modalConfirmBtnText = $config['REMOVEALLCARTBUTTON_MODAL_CONFIRM_TXT'] : $modalConfirmBtnText = 'Yes, please';
+        $config['REMOVEALLCARTBUTTON_MODAL_CANCEL_TXT'] ? $modalCancelBtnText = $config['REMOVEALLCARTBUTTON_MODAL_CANCEL_TXT'] : $modalCancelBtnText = 'No, thanks';
+
         $this->context->smarty->assign(
             [
                 'controller_link' => $controller_link,
+                'modal_header_text' => $modalHeaderText,
+                'confirm_button_text' => $modalConfirmBtnText,
+                'cancel_button_text' => $modalCancelBtnText,
             ]
         );
-        
+
         return $this->display(__FILE__,'modal.tpl');
+        
     }
 
 

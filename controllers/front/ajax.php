@@ -28,12 +28,13 @@ class RemoveAllCartButtonAjaxModuleFrontController extends ModuleFrontController
         $modal = array('modal' => $this->module->displayModal());
 
         exit(json_encode($modal));
+        
     }
 
     public function removeAll(){
         $products = $this->context->cart->getProducts();
         foreach ($products as $product) {
-            $this->context->cart->deleteProduct($product["id_product"],$product["id_product_attribute"]);
+            $this->context->cart->deleteProduct($product["id_product"],$product["id_product_attribute"],$product['id_customization']);
         }
      
     }
